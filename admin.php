@@ -20,11 +20,8 @@ if (isset($_SESSION['user'])) {
 $sql = "SELECT * FROM notes WHERE owner='" . $_SESSION['user'] . "'";
 $result = $conn->query($sql);
 
-while ($thisRow = $result->fetch_assoc()){
-  $name = $thisRow["name"];
-  $body = $thisRow["body"];
-  echo "<h3>" . $name . "</h3>";
-  echo "<p>" . $body . "</p>";
+while ($row = $result->fetch_assoc()){
+  echo "<a href='view.php?id=" . $row["id"] . "'><h3>" . $row["name"] . "</h3></a>";
 }
 
 ?>
