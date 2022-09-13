@@ -16,6 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // if the user exsits in the database with this password, log them in
     if ($result->num_rows) {
       $_SESSION['login'] = true;
+      $_SESSION['user'] = $_POST['user'];
       header("Location: /admin.php");
     }
   }
