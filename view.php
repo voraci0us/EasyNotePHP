@@ -11,4 +11,13 @@ while ($row = $result->fetch_assoc()){
 }
 ?>
 
+<form action="delete.php" method="POST">
+
+<?php
+echo "<input type='hidden' name='id' value='" . $_GET['id'] . "'/>";
+?>
+
+<button type="submit">Delete</button>
+</form>
+
 <a href="admin.php">Return to admin page.</a>
