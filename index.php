@@ -37,5 +37,6 @@ $conn->close();
     Password: <input type="text" name="password"><br>
     <button type="submit">Submit</button>
   </form>
+  Don't have an account? Register <a href="register.php">here</a>.
 </body>
 </html>
