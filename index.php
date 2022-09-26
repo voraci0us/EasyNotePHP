@@ -1,7 +1,5 @@
-<?php session_start(); ?>
-
 <?php
-
+session_start();
 include "connection.php";
 
 // if user is already logged in, send them to the admin page

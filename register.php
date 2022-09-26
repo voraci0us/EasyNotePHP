@@ -1,5 +1,5 @@
 <?php
-include "connection.php";
+require "connection.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($_POST['user'] and  $_POST['password']) {

@@ -1,9 +1,6 @@
-<?php session_start();
-if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
-  header("Location: /index.php");
-}
-
-include "connection.php";
+<?php
+require "connection.php";
+require "loginCheck.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($_POST['name'] and $_POST['body']) {

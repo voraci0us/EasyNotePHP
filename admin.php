@@ -1,11 +1,6 @@
-<?php session_start(); ?>
-
 <?php
-if (!isset($_SESSION['login'])) {
-  header("Location: /index.php");
-}
-
-include "connection.php";
+require "connection.php";
+require "loginCheck.php";
 ?>
 
 <html>

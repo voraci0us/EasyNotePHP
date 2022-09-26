@@ -1,7 +1,7 @@
 <?php
-session_start();
+require "connection.php";
+require "loginCheck.php";
 
-include "connection.php";
 $sql = "SELECT * FROM notes WHERE id='" . $_GET['id'] . "'";
 $result = $conn->query($sql);
 

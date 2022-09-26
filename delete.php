@@ -1,7 +1,7 @@
 <?php
-session_start();
+require "connection.php";
+require "loginCheck.php";
 
-include "connection.php";
 $sql = "DELETE FROM notes WHERE id='" . $_POST['id'] . "'";
 $result = $conn->query($sql);
 
