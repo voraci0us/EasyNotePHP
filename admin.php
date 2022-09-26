@@ -1,11 +1,7 @@
 <?php
 require "connection.php";
 require "loginCheck.php";
-
-require_once 'vendor/autoload.php';
-
-$loader = new \Twig\Loader\FilesystemLoader('templates');
-$twig = new \Twig\Environment($loader);
+require "template.php";
 
 $template = $twig->load('admin.htm');
 
