@@ -1,31 +1,16 @@
 <?php
 require "connection.php";
 require "loginCheck.php";
-?>
 
-<html>
-<head></head>
-<body>
+require_once 'vendor/autoload.php';
 
-<?php
-if (isset($_SESSION['user'])) {
-  print "<h1>Welcome to the notes app, " . $_SESSION['user'] . "!</h1>";
-}
+$loader = new \Twig\Loader\FilesystemLoader('templates');
+$twig = new \Twig\Environment($loader);
 
-$sql = "SELECT * FROM notes WHERE owner='" . $_SESSION['user'] . "'";
+$template = $twig->load('admin.htm');
+
+$sql = "SELECT id,name FROM notes WHERE owner='" . $_SESSION['user'] . "'";
 $result = $conn->query($sql);
-
-while ($row = $result->fetch_assoc()){
-  echo "<a href='view.php?id=" . $row["id"] . "'><h3>" . $row["name"] . "</h3></a>";
-}
+echo $template->render(['user' => $_SESSION['user'], 'notes' => $result->fetch_all()]);
 
 ?>
-
-<p><a href="new.php">Create a new note.</a></p>
-
-<form action="logout.php" method="POST">
-<button type="submit">Log Out</button>
-</form>
-
-</body>
-</html>

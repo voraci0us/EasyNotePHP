@@ -1,0 +1,17 @@
+{% extends "base.htm" %}
+
+{% block content %}
+
+<h1>Welcome to the notes app, {{ user }}!</h1>
+
+{% for note in notes %}
+    <a href='view.php?id={{ note[0] }}'><h3>{{ note[1] }}</h3></a>
+{% endfor %}
+
+<p><a href="new.php">Create a new note.</a></p>
+
+<form action="logout.php" method="POST">
+<button type="submit">Log Out</button>
+</form>
+
+{% endblock %}
