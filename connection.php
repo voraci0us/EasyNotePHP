@@ -21,8 +21,14 @@ if (!array_key_exists('EASYNOTE_DB_NAME', $env)) {
 }
 else { $dbname = $env["EASYNOTE_DB_NAME"]; }
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
+$conn = mysql_connect($servername, $username, $password);
+if (!$conn) {
+	die("Connection failed : " . mysql_error());
 }
+
+$db_selected = mysql_select_db($dbname, $conn);
+if (!$db_selected) {
+	die ("Database doesn't exist or I don't have rights to view it : " . mysql_error());
+}
+
 ?>
