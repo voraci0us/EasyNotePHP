@@ -21,14 +21,32 @@ if (!array_key_exists('EASYNOTE_DB_NAME', $env)) {
 }
 else { $dbname = $env["EASYNOTE_DB_NAME"]; }
 
-$conn = mysql_connect($servername, $username, $password);
+$conn = mysqli_connect($servername, $username, $password);
 if (!$conn) {
-	die("Connection failed : " . mysql_error());
+	die("Connection failed");
 }
 
-$db_selected = mysql_select_db($dbname, $conn);
-if (!$db_selected) {
-	die ("Database doesn't exist or I don't have rights to view it : " . mysql_error());
-}
+$query = "
+CREATE DATABASE IF NOT EXISTS " . $dbname . ";";
+$conn->query($query);
 
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+$query = "
+CREATE TABLE IF NOT EXISTS users ( 
+	username text DEFAULT NULL, 
+	password text DEFAULT NULL, 
+	id int(11) AUTO_INCREMENT, 
+	name text DEFAULT NULL, 
+	PRIMARY KEY (id)
+);";
+$conn->query($query);
+$query = "
+CREATE TABLE IF NOT EXISTS notes ( 
+	id int(11) AUTO_INCREMENT, 
+	owner text DEFAULT NULL,	
+	name text DEFAULT NULL,	
+	body text DEFAULT NULL,	
+	PRIMARY KEY (id)
+);";
+$conn->query($query);
 ?>
