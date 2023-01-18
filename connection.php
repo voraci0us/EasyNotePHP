@@ -1,4 +1,6 @@
 <?php
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 $env = getenv();
 if (!array_key_exists('EASYNOTE_DB_IP', $env)) {
 	echo "<p>Please set the EASYNOTE_DB_IP environment variable.</p>";
@@ -49,4 +51,6 @@ CREATE TABLE IF NOT EXISTS notes (
 	PRIMARY KEY (id)
 );";
 $conn->query($query);
+
+$conn->set_charset('utf8mb4');
 ?>
