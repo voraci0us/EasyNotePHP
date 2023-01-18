@@ -9,7 +9,7 @@ if (isset($_SESSION['login'])) {
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($_POST['user'] and  $_POST['password']) {
-    $sql = "SELECT * FROM users WHERE username=\"" . $_POST['user'] . "\" and password=\"" . $_POST['password'] . "\"";
+    $sql = "SELECT * FROM users WHERE username=\"" . $_POST['user'] . "\" and password=\"" . md5($_POST['password']) . "\"";
     $result = $conn->query($sql);
     // if the user exsits in the database with this password, log them in
     if ($result->num_rows) {

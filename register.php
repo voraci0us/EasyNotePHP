@@ -4,7 +4,8 @@ require "connection.php";
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($_POST['user'] and  $_POST['password']) {
     echo $_POST['user'] . "<br />" . $_POST['password'];
-    $sql = "INSERT INTO users (username,password) VALUES ('$_POST[user]','$_POST[password]')";
+    $hashedPassword = md5($_POST[password]);
+    $sql = "INSERT INTO users (username,password) VALUES ('$_POST[user]','$hashedPassword')";
     $result = $conn->query($sql);
     header("Location: /index.php");
   }
