@@ -1,23 +1,12 @@
 <?php
 require "connection.php";
 require "loginCheck.php";
+require "template.php";
 
-$sql = "SELECT * FROM notes WHERE id='" . $_GET['id'] . "'";
-$result = $conn->query($sql);
+$template = $twig->load('view.htm');
 
-while ($row = $result->fetch_assoc()){
-  echo "<h3>" . $row["name"] . "</h3>";
-  echo "<p>" . $row["body"] . "</p>";
-}
+$sql = "SELECT name,body FROM notes WHERE id='" . $_GET['id'] . "'";
+$result = $conn->query($sql)->fetch_row();
+echo $template->render(['id' => $_GET['id'], 'user' => $_SESSION['user'], 'name' => $result[0], 'body' => $result[1]]);
+
 ?>
-
-<form action="delete.php" method="POST">
-
-<?php
-echo "<input type='hidden' name='id' value='" . $_GET['id'] . "'/>";
-?>
-
-<button type="submit">Delete</button>
-</form>
-
-<a href="admin.php">Return to admin page.</a>

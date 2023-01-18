@@ -1,0 +1,15 @@
+{% extends "base.htm" %}
+
+{% block content %}
+
+<h3>{{ name }}</h3>
+<p>{{ body }}</p>
+
+<form action="delete.php" method="POST">
+	<input type="hidden" name="id" value="{{ id }}"/>
+	<button type="submit">Delete</button>
+</form>
+
+<a href="admin.php">Return to admin page.</a>
+
+{% endblock %}
