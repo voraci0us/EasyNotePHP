@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "connection.php";
+require "template.php";
 
 // if user is already logged in, send them to the admin page
 if (isset($_SESSION['login'])) {
@@ -22,19 +23,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Bad request";
   }
 }
-
+else {
+  $template = $twig->load('index.htm');
+  echo $template->render();
+}
 $conn->close();
 ?>
-
-<html>
-<head>
-</head>
-<body>
-  <form action="index.php" method="POST">
-    Username: <input type="text" name="user"><br>
-    Password: <input type="text" name="password"><br>
-    <button type="submit">Submit</button>
-  </form>
-  Don't have an account? Register <a href="register.php">here</a>.
-</body>
-</html>
