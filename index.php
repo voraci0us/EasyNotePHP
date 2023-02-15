@@ -9,6 +9,7 @@ if (isset($_SESSION['login'])) {
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+  echo "we made it";
   if ($_POST['user'] and  $_POST['password']) {
     $sql = "SELECT * FROM users WHERE username=\"" . $_POST['user'] . "\" and password=\"" . md5($_POST['password']) . "\"";
     $result = $conn->query($sql);
@@ -17,6 +18,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['login'] = true;
       $_SESSION['user'] = $_POST['user'];
       header("Location: /admin.php");
+    }
+    else {
+      header("Location: /index.php");
     }
   }
   else {
