@@ -11,10 +11,10 @@ if (isset($_SESSION['login'])) {
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   echo "we made it";
   if ($_POST['user'] and  $_POST['password']) {
-    $sql = "SELECT * FROM users WHERE username=\"" . $_POST['user'] . "\" and password=\"" . md5($_POST['password']) . "\"";
-    $result = $conn->query($sql);
+    $sql = "SELECT password FROM users WHERE username=\"" . $_POST['user'] . "\"";# and password=\"" . md5($_POST['password']) . "\"";
+    $result = $conn->query($sql)->fetch_array(MYSQLI_ASSOC);
+    if ($result['password'] == md5($_POST['password'])){
     // if the user exsits in the database with this password, log them in
-    if ($result->num_rows) {
       $_SESSION['login'] = true;
       $_SESSION['user'] = $_POST['user'];
       header("Location: /admin.php");
